@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/bullet.png","C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/bin/DesktopGL/Content/bullet.xnb","TextureProcessor","Texture2DContent",230,8181,0.124277
+"C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/enemy1.png","C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/bin/DesktopGL/Content/enemy1.xnb","TextureProcessor","Texture2DContent",954,65621,0.0788304
+"C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/main1.png","C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/bin/DesktopGL/Content/main1.xnb","TextureProcessor","Texture2DContent",963,61589,0.0866174
