@@ -10,16 +10,15 @@ namespace Space_shooter
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        
+        private enemy _myEnemy;
         private Texture2D playerSprite;
-        private Texture2D playerSpritefirstenemy;
+       // private Texture2D playerSpritefirstenemy;
         private Texture2D bullet;
         private Vector2 position = new Vector2(340, 330);
         private Rectangle enemyRectangle = new Rectangle(340, 0, 64, 64);
         private Rectangle playerRectangle = new Rectangle(340,330,124,124);
         private Boolean bulletChecker;
         private Vector2 bulletposition;
-        private Boolean FalsebulletChecker = false;
         private Rectangle bulletRectangle = new Rectangle(340, 330, 23, 88);
         public Game1()
         {
@@ -36,11 +35,12 @@ namespace Space_shooter
 
         protected override void LoadContent()
         {
+            _myEnemy = new enemy();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            playerSprite = Content.Load<Texture2D>("main1"); 
-            playerSpritefirstenemy = Content.Load<Texture2D>("enemy1");
+            playerSprite = Content.Load<Texture2D>("main1");
+            _myEnemy.playerSpritefirstenemy = Content.Load<Texture2D>("enemy1");
             bullet = Content.Load<Texture2D>("bullet");
-        }
+        } 
 
         protected override void Update(GameTime gameTime)
         {
@@ -59,7 +59,7 @@ namespace Space_shooter
             }
             if (bulletChecker)
             {
-                bulletposition.Y -= 18;
+                bulletposition.Y -= 36;
             }
             if (bulletRectangle.Intersects(enemyRectangle))
             {
@@ -71,19 +71,19 @@ namespace Space_shooter
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                position.Y -= 5000000000000;
+                position.Y -= 5;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                position.Y += 5000000000000000000;
+                position.Y += 5;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                position.X += 5000000000;
+                position.X += 5;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                position.X -= 500000000000;
+                position.X -= 5;
             }
             if (playerRectangle.Intersects(enemyRectangle))
             {
@@ -100,7 +100,7 @@ namespace Space_shooter
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            _spriteBatch.Draw(playerSpritefirstenemy, enemyRectangle, Color.White);
+            _spriteBatch.Draw(_myEnemy.playerSpritefirstenemy, enemyRectangle, Color.White);
             
             if (bulletChecker)
             {   
