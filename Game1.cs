@@ -2,20 +2,22 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Space_shooter
 {
     public class Game1 : Game
     {
+        List<Enemy> enemyList = new(1);
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private enemy _myEnemy;
+        
         private Texture2D playerSprite;
-       // private Texture2D playerSpritefirstenemy;
         private Texture2D bullet;
         private Vector2 position = new Vector2(340, 330);
-        private Rectangle enemyRectangle = new Rectangle(340, 0, 64, 64);
         private Rectangle playerRectangle = new Rectangle(340,330,124,124);
         private Boolean bulletChecker;
         private Vector2 bulletposition;
@@ -35,10 +37,17 @@ namespace Space_shooter
 
         protected override void LoadContent()
         {
-            _myEnemy = new enemy();
+            Debug.WriteLine("Loading content");
+            for (int i = 0; i < 1; i++)
+            {
+                Debug.WriteLine("loading enemy");
+                enemyList.Add(new Enemy());
+                enemyList[i].enemyTexture = Content.Load<Texture2D>("enemy1");
+                enemyList[i].enemyRectangle = new Rectangle(340, 0, 64, 64);
+            }
+            Debug.WriteLine("Loading player and bullet");
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             playerSprite = Content.Load<Texture2D>("main1");
-            _myEnemy.playerSpritefirstenemy = Content.Load<Texture2D>("enemy1");
             bullet = Content.Load<Texture2D>("bullet");
         } 
 
@@ -61,10 +70,7 @@ namespace Space_shooter
             {
                 bulletposition.Y -= 36;
             }
-            if (bulletRectangle.Intersects(enemyRectangle))
-            {
-                bulletChecker = false;
-            }
+            
             if (bulletRectangle.Y <= -100) 
             {
                 bulletChecker = false;
@@ -85,9 +91,16 @@ namespace Space_shooter
             {
                 position.X -= 5;
             }
-            if (playerRectangle.Intersects(enemyRectangle))
+            for (int i = 0; i < enemyList.Count; i++)
             {
-                Exit();
+                if (playerRectangle.Intersects(enemyList[i].enemyRectangle))
+                {
+                    Exit();
+                }
+                if (bulletRectangle.Intersects(enemyList[i].enemyRectangle))
+                {
+                    bulletChecker = false;
+                }
             }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -100,8 +113,11 @@ namespace Space_shooter
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_myEnemy.playerSpritefirstenemy, enemyRectangle, Color.White);
-            
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                _spriteBatch.Draw(enemyList[i].enemyTexture, enemyList[i].enemyRectangle, Color.White);
+                Console.WriteLine("drawing enemy");
+            }
             if (bulletChecker)
             {   
                 _spriteBatch.Draw(bullet,bulletposition, Color.White);

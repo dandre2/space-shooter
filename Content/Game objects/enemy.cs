@@ -2,10 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-public class enemy
+public class Enemy
 {
     private Boolean dead;
-    public Texture2D playerSpritefirstenemy;
-    public Rectangle enemyRectangle = new Rectangle(340, 0, 64, 64);
-    public enemy() { }
-}   
+    public Texture2D enemyTexture;
+    public Rectangle enemyRectangle;
+    public Enemy() { }
+
+
+
+
+
+}

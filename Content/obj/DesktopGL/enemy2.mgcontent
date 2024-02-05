@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/main1.png</SourceFile>
-  <SourceTime>2024-01-14T20:57:25.2506521-06:00</SourceTime>
-  <DestFile>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/bin/DesktopGL/main1.xnb</DestFile>
-  <DestTime>2024-01-29T22:04:06.0611525-06:00</DestTime>
+  <SourceFile>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/enemy2.png</SourceFile>
+  <SourceTime>2024-01-29T21:25:39.0684331-06:00</SourceTime>
+  <DestFile>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/bin/DesktopGL/enemy2.xnb</DestFile>
+  <DestTime>2024-02-02T19:51:16.3709656-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T06:44:56-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

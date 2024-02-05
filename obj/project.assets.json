@@ -108,11 +108,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dandr\\OneDrive\\Documents\\programming\\Space-shooter\\Space-shooter.csproj",
+      "projectUniqueName": "C:\\Users\\dandr\\OneDrive\\Documents\\GitHub\\space-shooter\\Space-shooter.csproj",
       "projectName": "Space-shooter",
-      "projectPath": "C:\\Users\\dandr\\OneDrive\\Documents\\programming\\Space-shooter\\Space-shooter.csproj",
+      "projectPath": "C:\\Users\\dandr\\OneDrive\\Documents\\GitHub\\space-shooter\\Space-shooter.csproj",
       "packagesPath": "C:\\Users\\dandr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dandr\\OneDrive\\Documents\\programming\\Space-shooter\\obj\\",
+      "outputPath": "C:\\Users\\dandr\\OneDrive\\Documents\\GitHub\\space-shooter\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

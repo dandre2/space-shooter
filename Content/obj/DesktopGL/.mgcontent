@@ -4,11 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/bullet.png</File>
-    <File>C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/enemy1.png</File>
-    <File>C:/Users/dandr/OneDrive/Documents/programming/Space-shooter/Content/main1.png</File>
+    <File>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/bullet.png</File>
+    <File>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/enemy1.png</File>
+    <File>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/enemy2.png</File>
+    <File>C:/Users/dandr/OneDrive/Documents/GitHub/space-shooter/Content/main1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
