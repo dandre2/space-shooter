@@ -4,9 +4,10 @@ using System;
 
 public class Enemy
 {
-    private Boolean dead;
     public Texture2D enemyTexture;
     public Rectangle enemyRectangle;
+    public Texture2D enemy2Texture;
+    public Rectangle enemy2Rectangle;
     public Enemy() { }
 
 
