@@ -16,13 +16,15 @@ namespace Space_shooter
 
         private Texture2D playerSprite;
         private Texture2D bullet;
-        private Vector2 position = new Vector2(340, 330);
+        private Vector2 position = new Vector2(575, 666);
         private Vector2 bulletposition;
         private Boolean bulletChecker;
         private Rectangle bulletRectangle = new Rectangle(340, 330, 23, 88);
         private Rectangle playerRectangle = new Rectangle(340, 330, 124, 124);
-        List<Enemy> enemyList = new(8);
-        
+        List<Enemy> enemyList = new(32);
+        private SpriteFont file;
+        private int score = 0;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -32,33 +34,43 @@ namespace Space_shooter
 
         protected override void Initialize()
         {
-
+            _graphics.IsFullScreen = false;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 960;
+            _graphics.ApplyChanges();
             base.Initialize();
+
         }
 
         protected override void LoadContent()
         {
+            file = Content.Load<SpriteFont>("file");
             Debug.WriteLine("Loading content");
-            for(int i = 0; i < 2; i++)
+            for(int i = 0; i <4; i++)
             {
-                LoadEnemys(i);
+                LoadEnemys(i, 0, i);
             }
-            
-            
-                Debug.WriteLine("Loading player and bullet");
+            for (int i = 4; i < 8; i++)
+            {
+                LoadEnemys(i, 150, i-4);
+            }
+
+
+
+            Debug.WriteLine("Loading player and bullet");
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             playerSprite = Content.Load<Texture2D>("main1");
             bullet = Content.Load<Texture2D>("bullet");
         }
-        private void LoadEnemys(int index) 
+        private void LoadEnemys(int index, int offsetY, int offsetX) 
         {
             for (int i = 0; i < 2; i++)
             {
                 Debug.WriteLine("loading enemy");
                 enemyList.Add(new Enemy());
-                Debug.WriteLine("enemy" + (index * 2 + i));
+           
                 enemyList[index * 2 + i].enemyTexture = Content.Load<Texture2D>("enemy" + (i +1));
-                enemyList[index * 2 +i].enemyRectangle = new Rectangle(85 * (index *2 + i), 0, 64, 64);
+                enemyList[index * 2 + i].enemyRectangle = new Rectangle((150 *( offsetX * 2 + i)+ 30), 50+offsetY, 64, 64);
 
 
             }
@@ -81,7 +93,7 @@ namespace Space_shooter
             }
             if (bulletChecker)
             {
-                bulletposition.Y -= 36;
+                bulletposition.Y -= 60;
             }
             
             if (bulletRectangle.Y <= -100) 
@@ -90,32 +102,46 @@ namespace Space_shooter
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                position.Y -= 5;
+                position.Y -= 15;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                position.Y += 5;
+                position.Y += 15;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                position.X += 5;
+                position.X += 15;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                position.X -= 5;
+                position.X -= 15;
             }
             for (int i = 0; i < enemyList.Count; i++)
             {
-                if (playerRectangle.Intersects(enemyList[i].enemyRectangle))
+                if (enemyList[i] != null)
                 {
-                    Exit();
-                }
-                if (bulletRectangle.Intersects(enemyList[i].enemyRectangle))
-                {
-                    bulletChecker = false;
-                }
+                    if (playerRectangle.Intersects(enemyList[i].enemyRectangle))
+                    {
+                        Exit();
+                    }
+                    if (bulletRectangle.Intersects(enemyList[i].enemyRectangle))
+                    {
+                        bulletChecker = false;
+                        enemyList[i] = null;
+                        for (int j = 0; j< enemyList.Count+1; j+=2) 
+                        {
+                            if (i == j)
+                            {
+                                score += 10;
+                            }
+                            if (i+1==j) 
+                            {
+                                score += 20;
+                            }
+                        }
+                    }
 
-           
+                }
             }
             
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -126,13 +152,16 @@ namespace Space_shooter
              }
 
         protected override void Draw(GameTime gameTime)
-        {
+        { 
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             for (int i = 0; i < enemyList.Count; i++)
             {
-                _spriteBatch.Draw(enemyList[i].enemyTexture, enemyList[i].enemyRectangle, Color.White);
-                Console.WriteLine("drawing enemy");
+                if (enemyList[i] != null)
+                {
+                    _spriteBatch.Draw(enemyList[i].enemyTexture, enemyList[i].enemyRectangle, Color.White);
+                    Console.WriteLine("drawing enemy");
+                }
             }
      
             if (bulletChecker)
@@ -140,6 +169,13 @@ namespace Space_shooter
                 _spriteBatch.Draw(bullet,bulletposition, Color.White);
             }
             _spriteBatch.Draw(playerSprite, position , Color.White);
+
+
+
+
+            _spriteBatch.DrawString(file, "Score: " + score, new Vector2(900, 800), Color.Black);
+
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }

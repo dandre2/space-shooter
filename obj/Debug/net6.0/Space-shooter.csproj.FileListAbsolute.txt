@@ -55,3 +55,4 @@ C:\Users\dandr\OneDrive\Documents\GitHub\space-shooter\obj\Debug\net6.0\refint\S
 C:\Users\dandr\OneDrive\Documents\GitHub\space-shooter\obj\Debug\net6.0\Space-shooter.pdb
 C:\Users\dandr\OneDrive\Documents\GitHub\space-shooter\obj\Debug\net6.0\Space-shooter.genruntimeconfig.cache
 C:\Users\dandr\OneDrive\Documents\GitHub\space-shooter\obj\Debug\net6.0\ref\Space-shooter.dll
+C:\Users\dandr\OneDrive\Documents\GitHub\space-shooter\bin\Debug\net6.0\Content\File.xnb
