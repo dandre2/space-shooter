@@ -22,12 +22,13 @@ namespace Space_shooter
         private Boolean bulletChecker;
         private Rectangle bulletRectangle = new Rectangle(340, 330, 23, 88);
         private Rectangle playerRectangle = new Rectangle(340, 330, 124, 124);
-        List<Enemy> enemyList = new(32);
+        List<Enemy> enemyList = new(17);
         private SpriteFont file;
         private int score = 0;
         private int frames = 0;
         private Boolean xDirection = false;
-        private Boolean yDirection = false;
+        private Boolean Enemiesdead = false;
+        private Boolean addingEnemies = false;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -49,14 +50,7 @@ namespace Space_shooter
         {
             file = Content.Load<SpriteFont>("file");
             Debug.WriteLine("Loading content");
-            for(int i = 0; i <4; i++)
-            {
-                Load2Enemys(i, 0, i);
-            }
-            for (int i = 4; i < 8; i++)
-            {
-                Load2Enemys(i, 150, i-4);
-            }
+            AddingEnemiesBack();
 
 
 
@@ -69,13 +63,14 @@ namespace Space_shooter
         {
             for (int i = 0; i < 2; i++)
             {
+                
                 Debug.WriteLine("loading enemy");
                 enemyList.Add(new Enemy());
-           
-                enemyList[index * 2 + i].enemyTexture = Content.Load<Texture2D>("enemy" + (i +1));
-                enemyList[index * 2 + i].enemyRectangle = new Rectangle(100 *( offsetX * 2 + i)+ 400, 50+offsetY, 64, 64);
-
-
+                if (enemyList[index] != null)
+                {
+                    enemyList[index * 2 + i].enemyTexture = Content.Load<Texture2D>("enemy" + (i + 1));
+                    enemyList[index * 2 + i].enemyRectangle = new Rectangle(100 * (offsetX * 2 + i) + 400, 50 + offsetY, 64, 64);
+                }
             }
         }
         private void MoveEnemys(int xSpeed, int ySpeed)
@@ -89,9 +84,32 @@ namespace Space_shooter
                 }
             }
         }
-
+        private bool EnemiesDead()
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                if (enemyList[i] != null)
+                {
+                    return false;
+                }    
+            }
+            return true;
+        }
+        private void AddingEnemiesBack()
+        {
+            Debug.WriteLine("Adding Enemies Back");
+            for (int i = 0; i < 4; i++)
+                Load2Enemys(i, 0, i);
+            for (int i = 4; i < 8; i++)
+                Load2Enemys(i, 150, i - 4);
+        }
         protected override void Update(GameTime gameTime)
         {
+            if (score % 240 == 0)
+            {           
+                    enemyList.Clear();
+                    AddingEnemiesBack();                  
+            }
             frames += 1;
             if(frames % 2==0)
             {
@@ -106,6 +124,7 @@ namespace Space_shooter
             }
             if(frames == 70)
             {
+                MoveEnemys(0, 50);
                 frames = 0;
                 xDirection = !xDirection;
             }
@@ -189,7 +208,7 @@ namespace Space_shooter
             _spriteBatch.Begin();
             for (int i = 0; i < enemyList.Count; i++)
             {
-                if (enemyList[i] != null)
+                if (enemyList[i] != null && enemyList[i].enemyTexture !=null)
                 {
                     _spriteBatch.Draw(enemyList[i].enemyTexture, enemyList[i].enemyRectangle, Color.White);
                     Console.WriteLine("drawing enemy");
